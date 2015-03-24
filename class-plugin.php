@@ -77,11 +77,11 @@ class Lesson {
 
 
 		if ( ! is_admin() ) {
-			add_action( 'wp_footer', array( $this, 'lesson1') );
+			add_action( 'genesis_after_loop', array( $this, 'lesson1') );
 //			add_action( 'after_setup_theme', array( $this, 'lesson2' ) );
 //			add_action( 'after_setup_theme', array( $this, 'lesson3' ) );
 //			add_action( 'after_setup_theme', array( $this, 'lesson4') );
-			add_action( 'after_setup_theme', array( $this, 'lesson5' ) );
+//			add_action( 'after_setup_theme', array( $this, 'lesson5' ) );
 		}
 
 		add_action( 'after_setup_theme', array( $this, 'lesson6' ) );
@@ -196,7 +196,7 @@ class Lesson {
 
 	function get_doggie() {
 		return function( $name ) {
-			include( __DIR__ . '/lib/class-dog.php' );
+			include( trailingslashit( __DIR__ ) . 'lib/class-dog.php' );
 			return new Dog( $name );
 		};
 	}
@@ -221,7 +221,7 @@ class Lesson {
 		//* Dynamically load the file & assign the walker
 		add_filter( 'wp_edit_nav_menu_walker', function() {
 			require_once( trailingslashit( __DIR__ ) . 'lib/menu/class-walker-menu-before.php');
-			return '\testing\Add_Menu_Before_Walker';
+			return '\lesson_closure\Add_Menu_Before_Walker';
 		});
 	}
 

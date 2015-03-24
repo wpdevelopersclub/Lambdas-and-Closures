@@ -1,4 +1,4 @@
-<?php namespace testing;
+<?php namespace lesson_closure;
 
 class Dog {
 

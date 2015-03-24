@@ -1,4 +1,4 @@
-<?php namespace tonya;
+<?php namespace lesson_closure;
 
 class Add_Menu_Before_Walker extends \Walker_Nav_Menu_Edit {
 
