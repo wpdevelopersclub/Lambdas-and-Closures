@@ -21,6 +21,6 @@ class Dog {
 	}
 
 	public function walk() {
-		echo $this->name . ' is walking';
+		echo $this->name . ' is walking<br>';
 	}
 }

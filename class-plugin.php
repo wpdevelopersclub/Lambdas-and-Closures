@@ -12,7 +12,6 @@
 //* Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit( 'Cheatin&#8217; uh?' );
 
-
 class Lesson {
 
 	/** Properties *************************************************************/
@@ -75,9 +74,8 @@ class Lesson {
 	 */
 	private function init_hooks() {
 
-
 		if ( ! is_admin() ) {
-			add_action( 'genesis_after_loop', array( $this, 'lesson1') );
+//			add_action( 'genesis_after_loop', array( $this, 'lesson1') );
 //			add_action( 'after_setup_theme', array( $this, 'lesson2' ) );
 //			add_action( 'after_setup_theme', array( $this, 'lesson3' ) );
 //			add_action( 'after_setup_theme', array( $this, 'lesson4') );
@@ -121,15 +119,15 @@ class Lesson {
 
 	public function lesson2() {
 		//* Without an anonymous function
-		add_filter( 'the_title', array( $this, 'title_callback' ) );
+//		add_filter( 'the_title', array( $this, 'title_callback' ), 10, 2 );
 
 		//* With an anonymous function
-//		add_filter( 'the_title', function ( $title, $post_id ) {
-//			return 'Using a closure - ' . $title;
-//		}, 10, 2 );
+		add_filter( 'the_title', function ( $title, $post_id ) {
+			return 'Using a closure - ' . $title;
+		}, 10, 2 );
 	}
 
-	public function title_callback( $title ) {
+	public function title_callback( $title, $post_id ) {
 		return 'Using a callback - ' . $title;
 	}
 
@@ -146,6 +144,7 @@ class Lesson {
 		//* This will throw an "Undefined variable: $formatter" error
 		// as $formatter is outside of the closure's scope
 //		add_filter( 'the_title', function ( $title, $post_id ) {
+//			global $formatter;
 //			return sprintf( $formatter, 'Using a closure', $title );
 //		}, 10, 2 );
 
@@ -158,7 +157,7 @@ class Lesson {
 
 	/*******************************************
 	 * Lesson 4 - Scope of Anonymous functions
-	 * PHP version 5.3+
+	 * PHP version 5.4+
 	 ******************************************/
 
 	public function lesson4() {
@@ -208,7 +207,7 @@ class Lesson {
 	public function lesson6() {
 
 		//* Add body class(es)
-		add_filter( 'body_class', function( $classes ) {
+		add_filter( 'body_class', function( array $classes ) {
 			$classes[] = 'testing-example';
 			return $classes;
 		} );
